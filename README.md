@@ -24,4 +24,10 @@ MACRO - PROPRIEDADES PERSONALIZADAS E CONGELAR (CREATE CUSTOM PROPERTIES AND FRE
    (Create some custom properties in all configurations)
  - Congela a peça
    (Freeze parts)
-   
+ 
+ MACRO - CONGELAR - 5 SUBPASTAS
+  - Percorre todos os arquivos de uma determinada estrutura de pastas (com até 5 subpastas)
+  - Abre cada peça e arrasta a barra de congelar
+  - Abre as montagens e somente salva elas
+  - Ignora arquivos somente leitura
+  - Gera rquivo .txt informando quais arquivos estavam somente leitura e quais foram executados com sucesso
