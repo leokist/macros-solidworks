@@ -31,3 +31,7 @@ MACRO - PROPRIEDADES PERSONALIZADAS E CONGELAR (CREATE CUSTOM PROPERTIES AND FRE
   - Abre as montagens e somente salva elas
   - Ignora arquivos somente leitura
   - Gera rquivo .txt informando quais arquivos estavam somente leitura e quais foram executados com sucesso
+
+MACRO GRAVAR SOLIDWORKS
+  - Obtem informações de células do excel
+  - Grava as informações nas Propriedades Personalizadas do 3D que estiver ativo no SolidWorks
