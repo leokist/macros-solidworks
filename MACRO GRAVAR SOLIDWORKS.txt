@@ -1,0 +1,48 @@
+Sub GravarSolidWorks()
+    ' Macro criada por Leonardo H M Kist
+    ' Para a Macro funcionar, deve-se selecionar no Visual Basic:
+    '    -    Ferramentas > Referências > SldWorks Type Library
+    ' No excel, vincular ao objeto que irá chamar a macro
+    
+    Dim swApp As SldWorks.SldWorks
+    Dim swModel As SldWorks.ModelDoc2
+    Dim retval As String
+    
+    Set swApp = CreateObject("SldWorks.Application")
+    swApp.Visible = True
+    Set swModel = swApp.ActiveDoc
+   
+    'Descrição
+    denominaçãoCompleta = Range("B6").Value
+    denominaçãoReduzida = Range("B7").Value
+        
+    'Grava os dados nas Propriedades Gerais do arquivo
+    'retval = swModel.DeleteCustomInfo("DENOMINAÇÃO")
+    'retval = swModel.AddCustomInfo3("", "DENOMINAÇÃO", swCustomInfoText, denominaçãoReduzida)
+    'retval = swModel.DeleteCustomInfo("DENOMINAÇÃO COMPLETA")
+    'retval = swModel.AddCustomInfo3("", "DENOMINAÇÃO COMPLETA", swCustomInfoText, denominaçãoCompleta)
+    
+    'Grava os dados na Propriedade Específica de Cada Configuração
+    Dim listaConfigs As Variant
+    listaConfigs = swModel.GetConfigurationNames
+    Dim configName As Variant
+    Dim Name As String
+    
+    For Each configName In listaConfigs
+        Name = configName
+        swModel.AddCustomInfo3 Name, "CÓDIGO PRINCIPAL", swCustomInfoText, cod
+        
+        'Ativa a configuração
+        swModel.ShowConfiguration2 (Name)
+        
+        'Cria as novas propriedades
+        swModel.DeleteCustomInfo2 Name, "DENOMINAÇÃO"
+        swModel.DeleteCustomInfo2 Name, "DENOMINAÇÃO COMPLETA"
+        swModel.AddCustomInfo3 Name, "DENOMINAÇÃO", swCustomInfoText, denominaçãoReduzida
+        swModel.AddCustomInfo3 Name, "DENOMINAÇÃO COMPLETA", swCustomInfoText, denominaçãoCompleta
+        
+    Next configName
+    
+    swApp.SendMsgToUser "Ok!"
+
+End Sub
